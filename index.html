@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="ja" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>提案型転職 5タイプ価値観診断 | あなたのタイプは？</title>
+  <meta name="description" content="求人票に自分を合わせるのではなく、いままでの経験で企業の課題を解く『提案型転職』。リアルな就業体験10問（100点満点・按分配点）から、あなたの提案スタイルとキャリア戦略を精密診断。">
+  
+  <!-- OGP Tags -->
+  <meta property="og:title" content="提案型転職 あなたのタイプは？">
+  <meta property="og:description" content="求人票に合わせるのではなく、いままでの経験で役割をつくる。10問でわかるあなたの提案型転職スタイル診断。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naohiro-s.github.io/proud-babbage/">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    body {
+      font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .font-eng {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .option-card {
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .option-card:active {
+      transform: scale(0.985);
+    }
+    .fade-enter {
+      animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 antialiased min-h-full flex flex-col justify-between selection:bg-blue-600 selection:text-white">
+
+  <!-- スマホ前提コンテナ（最大幅480px） -->
+  <div class="w-full max-w-md mx-auto min-h-screen bg-slate-50 flex flex-col shadow-2xl relative border-x border-slate-200/60">
+
+    <!-- アプリ風ヘッダー -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 px-4 py-3 flex items-center justify-between shadow-sm">
+      <div class="flex items-center space-x-2 cursor-pointer" onclick="goToStart()">
+        <span class="w-7 h-7 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
+          <i class="fa-solid fa-compass"></i>
+        </span>
+        <span class="font-extrabold text-slate-900 text-base tracking-tight">提案型転職 <span class="text-blue-600 text-xs font-bold px-1.5 py-0.5 bg-blue-50 rounded border border-blue-100">あなたのタイプは？</span></span>
+      </div>
+      <div class="text-[11px] text-slate-500 bg-slate-100 px-2.5 py-1 rounded-full font-medium flex items-center">
+        <i class="fa-regular fa-clock mr-1 text-slate-400"></i>全10問 / 約2分
+      </div>
+    </header>
+
+    <!-- メインコンテンツ領域 -->
+    <main class="flex-grow p-4 pb-28">
+
+      <!-- ================= 1. スタート画面 ================= -->
+      <div id="screen-intro" class="fade-enter space-y-4">
+        
+        <!-- メインヒーローカード -->
+        <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 rounded-2xl text-white p-6 shadow-xl relative overflow-hidden">
+          <h1 class="text-xl font-extrabold tracking-tight leading-snug mb-3">
+            求人票に自分を合わせるな。<br>
+            いままでの経験で<span class="text-blue-400">「役割」をつくる。</span>
+          </h1>
+          <p class="text-slate-300 text-xs leading-relaxed mb-6">
+            20代・30代と同じ「条件検索型の市場」で戦うと、ミドルシニアは構造的に不利な土俵に立たされます。リアルな就業体験10問（順不同・複数選択・100点満点）から、あなたの価値観に合った<strong>「あなた流の提案スタイル」</strong>を導きます。
+          </p>
+          <button onclick="startDiagnosis()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-600/30 transition text-base flex items-center justify-center space-x-2">
+            <span>無料診断をはじめる（全10問）</span>
+            <i class="fa-solid fa-arrow-right text-sm"></i>
+          </button>
+          <div class="mt-3.5 bg-blue-950/70 border border-blue-500/30 rounded-xl p-2.5 flex items-center space-x-2 text-left">
+            <i class="fa-solid fa-shield-halved text-blue-400 text-xs flex-shrink-0"></i>
+            <div class="text-[11px] text-slate-300 leading-tight">
+              ※回答データはサーバー等に送信・保存されません（完全匿名・端末内処理）。
+            </div>
+          </div>
+        </div>
+
+        <!-- 診断でわかること（3つのカードに集約） -->
+        <div class="space-y-2.5">
+          <div class="text-xs font-bold text-slate-500 px-1 flex items-center">
+            <i class="fa-solid fa-star text-amber-500 mr-1.5"></i>この診断でわかる3つのこと
+          </div>
+
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">
+              <i class="fa-solid fa-compass"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 text-xs">① 提案型転職のスタイル（タイプ判定）</h3>
+              <p class="text-slate-500 text-[11px] leading-tight mt-0.5">
+                5つの価値観と100点満点レーダーチャートから、あなたの主軸となる提案アプローチを判定。
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-500 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 text-xs">② これまでの経験で培った「最大の強み」</h3>
+              <p class="text-slate-500 text-[11px] leading-tight mt-0.5">
+                単一特化・二刀流シナジー・主軸＋補佐連携など、他社で即戦力として活きる強み構造を分析。
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-white p-3.5 rounded-xl border border-slate-200/80 shadow-sm flex items-start space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex-shrink-0 flex items-center justify-center text-sm font-bold mt-0.5">
+              <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-800 text-xs">③ あなた専用の「転職の処方箋」</h3>
+              <p class="text-slate-500 text-[11px] leading-tight mt-0.5">
+                持ち込む提案書の形式、面接での商談化スタンス、避けるべき落とし穴を具体提示。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 著者プロフィール・連動コラム案内 -->
+        <div class="bg-slate-100 rounded-xl p-3 border border-slate-200 text-center">
+          <p class="text-[11px] text-slate-600 leading-relaxed">
+            📖 詳しい解説コラムは note にて公開中<br>
+            <a href="https://note.com" target="_blank" class="text-blue-600 font-bold underline hover:text-blue-700">『【40歳からの転職】求人票は見るな！組織の課題を自ら解く「提案型転職」のススメ』</a>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- ================= 2. 診断画面（属性＋10問） ================= -->
+      <div id="screen-quiz" class="hidden fade-enter space-y-4">
+        
+        <!-- プログレスバー -->
+        <div class="bg-white p-3.5 rounded-xl border border-slate-200 shadow-sm">
+          <div class="flex justify-between items-center text-xs font-bold mb-1.5">
+            <span id="step-label" class="text-blue-600">基本属性</span>
+            <span id="step-count" class="text-slate-500 font-eng">0 / 10</span>
+          </div>
+          <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-300" style="width: 5%"></div>
+          </div>
+        </div>
+
+        <!-- 質問カードコンテナ（JSで動的生成） -->
+        <div id="quiz-card" class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm space-y-4">
+          <!-- JS動的レンダリング -->
+        </div>
+
+      </div>
+
+      <!-- ================= 3. 診断結果画面 ================= -->
+      <div id="screen-result" class="hidden fade-enter space-y-4">
+        
+        <!-- 結果メインカード -->
+        <div class="bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 rounded-2xl p-5 text-white shadow-xl relative overflow-hidden">
+          <div class="inline-block px-2.5 py-0.5 bg-blue-500/20 border border-blue-400/30 rounded-full text-blue-300 text-[10px] font-bold mb-2">
+            診断レポート
+          </div>
+          
+          <div class="text-[11px] text-slate-300">あなたの主たる提案スタイル</div>
+          <h2 id="res-main-type" class="text-2xl font-extrabold text-white mt-0.5 mb-1 tracking-tight">Type D：課題解決型</h2>
+          <p id="res-tagline" class="text-blue-300 text-xs font-medium leading-snug mb-3">
+            「企業の経営・業務課題を読み解き、仮説改善案で価値を示すソリューション提案者」
+          </p>
+          
+          <!-- サブタイプ表示（シンプル化） -->
+          <div class="bg-white/10 backdrop-blur-md rounded-xl px-3.5 py-2.5 border border-white/10 flex items-center justify-between">
+            <span class="text-[11px] text-slate-300">サブタイプ</span>
+            <span id="res-sub-type" class="text-xs font-bold text-white">安定実行型（20点）</span>
+          </div>
+        </div>
+
+        <!-- レーダーチャートカード -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center justify-between mb-2">
+            <h3 class="font-bold text-slate-800 text-xs flex items-center">
+              <i class="fa-solid fa-chart-pie text-blue-600 mr-1.5"></i>5タイプ価値観バランス
+            </h3>
+            <span class="text-[10px] text-slate-400 font-normal">合計: 100点満点</span>
+          </div>
+          <div class="w-full h-[230px] flex items-center justify-center">
+            <canvas id="typeRadarChart"></canvas>
+          </div>
+          <div class="grid grid-cols-5 gap-1 text-center pt-2 border-t border-slate-100 mt-2 text-[10px]">
+            <div><span class="text-slate-400 block">安定</span><strong id="score-a" class="text-blue-600 font-eng">0点</strong></div>
+            <div><span class="text-slate-400 block">専門</span><strong id="score-b" class="text-blue-600 font-eng">0点</strong></div>
+            <div><span class="text-slate-400 block">協働</span><strong id="score-c" class="text-blue-600 font-eng">0点</strong></div>
+            <div><span class="text-slate-400 block">解決</span><strong id="score-d" class="text-blue-600 font-eng">0点</strong></div>
+            <div><span class="text-slate-400 block">創造</span><strong id="score-e" class="text-blue-600 font-eng">0点</strong></div>
+          </div>
+        </div>
+
+        <!-- あなた独自の強み構造分析（パターン明記＆詳細解説） -->
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-800 text-xs flex items-center">
+              <i class="fa-solid fa-sparkles text-indigo-600 mr-1.5"></i>あなた独自の強み構造分析
+            </h3>
+            <div class="flex items-center space-x-1">
+              <span id="res-pattern-badge" class="text-[10px] text-indigo-700 bg-indigo-50 border border-indigo-200/80 px-2 py-0.5 rounded-full font-bold">
+                二刀流シナジー型
+              </span>
+              <button type="button" onclick="openPatternModal()" class="text-slate-400 hover:text-indigo-600 active:text-indigo-800 p-0.5 text-xs transition" title="4つの強み構造パターンとは？">
+                <i class="fa-solid fa-circle-info"></i>
+              </button>
+            </div>
+          </div>
+
+          <div id="res-synergy-box" class="bg-indigo-50/70 p-3.5 rounded-xl border border-indigo-100 text-xs text-indigo-950 leading-relaxed font-medium">
+            <!-- 動的挿入 -->
+          </div>
+
+          <p id="res-characteristics" class="text-slate-600 text-xs leading-relaxed">
+            <!-- 特徴本文 -->
+          </p>
+
+          <div class="bg-blue-50/70 p-3 rounded-xl border border-blue-100">
+            <div class="text-[11px] font-bold text-blue-900 mb-0.5 flex items-center">
+              <i class="fa-solid fa-check-double text-blue-600 mr-1"></i>最大の武器
+            </div>
+            <div id="res-coreStrength" class="text-xs text-slate-700 font-medium leading-tight">
+              <!-- 最大の武器 -->
+            </div>
+          </div>
+        </div>
+
+        <!-- あなた流「提案型転職」のアクション処方箋 -->
+        <div class="bg-white rounded-2xl border-2 border-blue-600/20 p-5 shadow-sm space-y-4">
+          <div class="flex items-center space-x-2.5 pb-3 border-b border-slate-100">
+            <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-sm font-bold shadow-sm">
+              <i class="fa-solid fa-file-signature"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-slate-900 text-sm">あなた流「提案型転職」の処方箋</h3>
+              <p class="text-[10px] text-slate-500">無理のない型で面接を商談に変える</p>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div>
+              <div class="text-xs font-bold text-slate-800 flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px] mr-1.5 font-bold">1</span>
+                持ち込む「提案書」の粒度・形式
+              </div>
+              <div id="res-proposal-format" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed">
+                <!-- JS動的挿入 -->
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-bold text-slate-800 flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-[10px] mr-1.5 font-bold">2</span>
+                面接での対話スタンス（商談化の切り出し方）
+              </div>
+              <div id="res-interview-stance" class="bg-slate-50 p-3 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed">
+                <!-- JS動的挿入 -->
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-bold text-amber-800 flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-[10px] mr-1.5 font-bold">!</span>
+                避けるべき「落とし穴（出羽守・評論家化の防止）」
+              </div>
+              <div id="res-pitfall" class="bg-amber-50 p-3 rounded-xl border border-amber-200 text-xs text-amber-900 leading-relaxed">
+                <!-- JS動的挿入 -->
+              </div>
+            </div>
+
+            <div>
+              <div class="text-xs font-bold text-emerald-800 flex items-center mb-1">
+                <span class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-[10px] mr-1.5 font-bold">✓</span>
+                今からやるべき具体的ネクストアクション
+              </div>
+              <div id="res-nextaction" class="bg-emerald-50 p-3 rounded-xl border border-emerald-200 text-xs text-emerald-900 leading-relaxed">
+                <!-- JS動的挿入 -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 年代・在職年数によるパーソナライズ助言 -->
+        <div class="bg-slate-900 text-white rounded-2xl p-5 shadow-md space-y-2">
+          <div class="text-xs font-bold text-blue-300 flex items-center">
+            <i class="fa-solid fa-user-gear mr-1.5"></i>
+            あなた（<span id="res-attr-age">40代前半</span>・在職<span id="res-attr-tenure">11〜20年</span>）への助言
+          </div>
+          <p id="res-attr-advice" class="text-slate-300 text-xs leading-relaxed">
+            <!-- JS動的挿入 -->
+          </p>
+        </div>
+
+        <!-- シェア・保存・再診断アクション -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2.5">
+          <div class="text-xs font-bold text-slate-700 text-center mb-2">
+            診断結果をシェア・保存する
+          </div>
+
+          <div class="grid grid-cols-2 gap-2">
+            <!-- X (Twitter) シェア -->
+            <button onclick="shareOnX()" class="py-3 px-2 rounded-xl bg-black text-white font-bold text-xs shadow transition flex items-center justify-center space-x-1.5 hover:bg-slate-800 active:scale-95">
+              <i class="fa-brands fa-x-twitter text-sm"></i>
+              <span>Xでシェア</span>
+            </button>
+
+            <!-- LinkedIn / WebShare -->
+            <button onclick="shareNativeOrLinkedIn()" class="py-3 px-2 rounded-xl bg-[#0077b5] text-white font-bold text-xs shadow transition flex items-center justify-center space-x-1.5 hover:opacity-90 active:scale-95">
+              <i class="fa-brands fa-linkedin text-sm"></i>
+              <span>共有 / シェア</span>
+            </button>
+          </div>
+
+          <!-- テキストコピー -->
+          <button onclick="copyResultText()" class="w-full py-3 rounded-xl bg-slate-100 hover:bg-slate-200 active:bg-slate-300 text-slate-700 font-bold text-xs transition flex items-center justify-center space-x-2">
+            <i class="fa-regular fa-copy text-sm"></i>
+            <span id="copy-btn-label">結果テキストをコピー</span>
+          </button>
+
+          <!-- もう一度診断 -->
+          <button onclick="restartDiagnosis()" class="w-full py-2.5 rounded-xl text-slate-400 hover:text-slate-600 font-medium text-xs transition flex items-center justify-center space-x-1">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>もう一度診断する</span>
+          </button>
+        </div>
+
+        <!-- コラムへのリンクバナー -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-5 text-white shadow-lg space-y-2 text-center">
+          <div class="text-[11px] font-bold text-blue-200">提案型転職の実践ノウハウを完全解説</div>
+          <h4 class="font-bold text-sm">【note連動コラム】<br>求人票は見るな！組織の課題を自ら解く「提案型転職」のススメ</h4>
+          <p class="text-[11px] text-blue-100 leading-snug">
+            A4 1枚の課題解決シートの作り方や、面接を商談に変える4つの切り込み方を全公開。
+          </p>
+          <a href="https://note.com" target="_blank" class="inline-block mt-2 px-5 py-2.5 bg-white text-blue-700 font-bold text-xs rounded-xl shadow hover:bg-blue-50 active:scale-95 transition">
+            <span>コラム本編を読む</span>
+            <i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+          </a>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- 固定フッター操作バー（クイズ進行中のみ表示） -->
+    <div id="bottom-bar" class="hidden fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 z-50 flex flex-col space-y-2 shadow-lg">
+      <div class="flex items-center justify-between space-x-3">
+        <button id="btn-prev" onclick="prevStep()" class="hidden px-4 py-3 rounded-xl border border-slate-300 text-slate-600 font-bold text-xs active:bg-slate-100 transition flex items-center">
+          <i class="fa-solid fa-arrow-left mr-1"></i> 戻る
+        </button>
+        <div class="flex-grow"></div>
+        <button id="btn-next" onclick="nextStep()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-blue-600 active:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-500/20 transition flex items-center justify-center space-x-1.5 disabled:opacity-50 disabled:cursor-not-allowed">
+          <span id="btn-next-text">次へ進む</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+      <div class="text-center text-[9px] text-slate-400">
+        © 2026 Naohisa Hashimoto | Updated: 2026.08.29
+      </div>
+    </div>
+
+    <!-- 4つの強み構造パターン解説モーダル -->
+    <div id="pattern-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-2xl max-w-md w-full max-h-[85vh] overflow-y-auto p-5 shadow-2xl space-y-4 fade-enter">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div class="flex items-center space-x-2">
+            <span class="w-6 h-6 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center text-xs font-bold">
+              <i class="fa-solid fa-sparkles"></i>
+            </span>
+            <h3 class="font-bold text-slate-900 text-sm">4つの強み構造パターンとは？</h3>
+          </div>
+          <button onclick="closePatternModal()" class="text-slate-400 hover:text-slate-600 p-1 text-base">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <p class="text-xs text-slate-600 leading-relaxed">
+          100点満点の得点バランスから、他社に提案する際の<strong>「あなたの強みの活かし方（勝ち筋）」</strong>を4パターンに分類しています。
+        </p>
+
+        <div class="space-y-3">
+          <!-- パターン1 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 flex items-center">
+                <i class="fa-solid fa-crown text-amber-500 mr-1.5 text-xs"></i>① 単一特化型
+              </span>
+              <span class="text-[10px] bg-amber-100/80 text-amber-800 font-bold px-2 py-0.5 rounded">突出タイプ</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              1つの主タイプが圧倒的に高いスコア（45点以上等）。無理に複数の強みを混ぜず、<strong>「1本の鋭い軸（専門性）」</strong>を中心とした唯一無二のプロフェッショナルとして勝負する戦略が適しています。
+            </p>
+          </div>
+
+          <!-- パターン2 -->
+          <div class="bg-indigo-50/60 p-3 rounded-xl border border-indigo-100 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-indigo-950 flex items-center">
+                <i class="fa-solid fa-bolt text-indigo-600 mr-1.5 text-xs"></i>② 二刀流シナジー型
+              </span>
+              <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded">高得点拮抗</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              主タイプとサブタイプが共に高く拮抗（25点以上）。2つの強みが掛け合わさることで<strong>「希少な相乗効果（シナジー）」</strong>を発揮し、他者と差別化された独自ポジションを提案できます。
+            </p>
+          </div>
+
+          <!-- パターン3 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 flex items-center">
+                <i class="fa-solid fa-layer-group text-blue-600 mr-1.5 text-xs"></i>③ 主軸＋補佐連携型
+              </span>
+              <span class="text-[10px] bg-blue-100/80 text-blue-800 font-bold px-2 py-0.5 rounded">王道標準</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              メインの強みを<strong>「突破口」</strong>としつつ、サブタイプを<strong>「実務の安心材料（補佐役）」</strong>として連携させるスタイル。提案書で主軸の成果を示し、面接でサブの知見を添えて信頼を獲得します。
+            </p>
+          </div>
+
+          <!-- パターン4 -->
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-xs text-slate-900 flex items-center">
+                <i class="fa-solid fa-shapes text-emerald-600 mr-1.5 text-xs"></i>④ 多面統合バランサー型
+              </span>
+              <span class="text-[10px] bg-emerald-100/80 text-emerald-800 font-bold px-2 py-0.5 rounded">上位3軸拮抗</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-relaxed">
+              上位3つのスコアが極めて均等に高い。状況に応じて守り・攻め・調整を自在に切り替える<strong>「現場統括・ユーティリティリーダー」</strong>としての総合力が最大の武器となります。
+            </p>
+          </div>
+        </div>
+
+        <button onclick="closePatternModal()" class="w-full py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl shadow transition">
+          閉じる
+        </button>
+      </div>
+    </div>
+
+    <!-- ミニフッター（ページ最下部） -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-[10px] text-slate-400">
+      <p id="footer-line">© 2026 Naohisa Hashimoto | Updated: 2026.08.29</p>
+    </footer>
+
+  </div>
+
+  <!-- 診断ロジック JS -->
+  <script>
+    // 診断状態管理（100点満点）
+    const state = {
+      currentStep: 0, // 0: 基本属性, 1〜10: 設問
+      attributes: {
+        age: '40代前半',
+        tenure: '11〜20年',
+        intention: '1年以内・良い話があれば'
+      },
+      answers: {}, // 各設問の回答 key: q1..q10 -> value: ['A', 'D'] (配列・複数選択)
+      shuffledQuestions: [], // シャッフルされた設問データ
+      scores: { A: 0, B: 0, C: 0, D: 0, E: 0 },
+      chartInstance: null
+    };
+
+    // 5タイプの定義メタデータ
+    const typeMeta = {
+      A: {
+        code: 'A',
+        name: 'Type A：安定実行型',
+        shortName: '安定実行型',
+        tagline: '「明確な役割のもと、組織の安定運用と着実なリスク管理を支える信頼の守護者」',
+        characteristics: '担当範囲と責任が明確な環境で最大の真価を発揮します。大風呂敷を広げた急激な変革よりも、日々の業務を着実に遂行し、リスクを予見・低減して品質や安定性を高めることに強い誇りとやりがいを感じるタイプです。',
+        coreStrength: '「破綻のない安定運用力、着実な品質改善、組織のリスク管理と標準化」',
+        proposalFormat: '<strong>【業務改善・安定運用シート（A4 1枚）】</strong><br>大掛かりな新規事業提案などは不要です。応募先の業務フローを想定し、「入社後どのように業務の標準化やリスク低減、ミスのない安定運用に貢献できるか」を簡潔にまとめて提示するのがベストです。',
+        interviewStance: '「求められた役割を120%の確実性で完遂し、周囲が安心して任せられる盤石な体制をつくる」という安心感・信頼感を前面に対話しましょう。',
+        pitfall: '「言われたことしかやらない人」「変化を嫌う人」と誤認されないよう、「現状の運用をどう安全に効率化するか」という改善意識を必ず添えてください。',
+        nextAction: '直近3年間で自分が「ミスを防いだ」「業務フローを標準化した」具体的事例を3つリストアップし、A4 1枚のフォーマットに書き出してみましょう。'
+      },
+      B: {
+        code: 'B',
+        name: 'Type B：専門追求型',
+        shortName: '専門追求型',
+        tagline: '「高度な専門知見と職人的スキルで、特定の難問を解き明かすスペシャリスト」',
+        characteristics: '幅広い管理業務よりも、特定領域の専門性を深め、高い品質のアウトプットを出すことに生きがいを感じます。役職の肩書よりも「専門家として頼りにされ、難問を解決すること」を重視するプロフェッショナルです。',
+        coreStrength: '「特定ドメインにおける深い知見、高度な技術力、実務の突破力」',
+        proposalFormat: '<strong>【専門領域特化の技術・実務分析シート（2〜3枚）】</strong><br>経営全般ではなく、自身の専門領域（経理、法務、特定技術、専門営業など）に絞り、「御社のこの領域におけるボトルネックを、私の専門ノウハウでどう解消できるか」を提示します。',
+        interviewStance: '「御社が抱えるこの専門的課題について、他社事例や最新知見を踏まえると、このようなアプローチが可能です」と、専門コンサルタントのように対話します。',
+        pitfall: '自社の専門知識を一方的に講釈する「学者タイプ」に見られないよう、相手の事業実態や現場の制約に寄り添う柔軟性を示しましょう。',
+        nextAction: '応募先企業が直面している専門課題（法改正、DX、技術負債など）に対し、「自分なら初期1ヶ月でどのデータを分析するか」をメモにまとめましょう。'
+      },
+      C: {
+        code: 'C',
+        name: 'Type C：関係協働型',
+        shortName: '関係協働型',
+        tagline: '「対話を通じて人を巻き込み、チームの力で組織の壁を越えるコミュニケーター」',
+        characteristics: '仕事内容そのものと同じくらい、「誰と働くか」「どんな雰囲気か」を大切にします。自分が前に出るだけでなく、周囲の話をじっくり聞き、メンバーを支援してチーム全体の成果を最大化することに長けています。',
+        coreStrength: '「高い共感力と傾聴力、組織間のハブとなる調整・ファシリテーション能力」',
+        proposalFormat: '<strong>【対話型・論点整理メモ（A4 1枚・アジェンダ形式）】</strong><br>完成された提案を一方的に持ち込むのではなく、「御社が現在直面している組織や体制の論点」をリストアップし、面接の場でディスカッションしながら一緒に解決策を探るスタイルが最適です。',
+        interviewStance: '「私を採用してください」ではなく、「御社の現場メンバーやチームが今一番困っていることは何ですか？」と質問を投げかけ、共同で役割をデザインしていく対話を作ります。',
+        pitfall: '「人がいいだけの人」と見られないよう、これまでに「周囲を巻き込んでどのような具体的成果を出したか」のファクトを明確に語れるように準備しましょう。',
+        nextAction: '対立や混乱があったプロジェクトで、どのように関係者の合意形成を取りまとめたか、その「対話の工夫」を言語化しておきましょう。'
+      },
+      D: {
+        code: 'D',
+        name: 'Type D：課題解決型',
+        shortName: '課題解決型',
+        tagline: '「企業の経営・業務課題を読み解き、仮説改善案で価値を示すソリューション提案者」',
+        characteristics: '役割が完全に決まっていなくても、そこに解決すべき課題があれば自律的に動き出せるタイプです。現状の問題を発見し、仮説を立てて周囲を動かし、仕組みを変えていくプロセスに最大のやりがいを感じます。',
+        coreStrength: '「問題設定力、仮説構築力、ビジネスを前進させる実行推進力」',
+        proposalFormat: '<strong>【課題仮説＋改善アプローチシート（3〜5枚）】</strong><br>企業の公開情報や業界動向から「御社は現在〇〇の領域で課題を抱えているのではないか」という仮説を立て、自分の過去の成功パターンをどう応用できるかを構造化して提示します。',
+        interviewStance: '「私は何をしてきたか」だけでなく、「御社のこの課題に対して、私なら初期3ヶ月で〇〇を検証し、半年で△△の成果を目指せます」と未来の時間軸で対話します。',
+        pitfall: '仮説を「正解の押し付け（出羽守）」にしてはいけません。「外から拝見した仮説ですので、実態とズレがあればぜひ教えてください」という謙虚な対話姿勢を崩さないことが肝要です。',
+        nextAction: '興味のある企業の決算短信や中期経営計画を1社読み、経営目標と現場求人の間にある「ミッシングリンク（推進役）」の仮説を立ててみましょう。'
+      },
+      E: {
+        code: 'E',
+        name: 'Type E：事業創造型',
+        shortName: '事業創造型',
+        tagline: '「用意された枠を飛び越え、新しい事業と役割そのものを切り拓くパイオニア」',
+        characteristics: '既存の求人票に応募するよりも、「この会社には今この役割が必要だ」と自らポジションを創り出したいタイプです。大きな裁量と責任を持ち、ゼロからイチを生み出すことに情熱を注ぎます。',
+        coreStrength: '「ゼロからの事業構想力、役割創出マインド、リスクテイクとリーダーシップ」',
+        proposalFormat: '<strong>【事業構想・新ポジション提案書（5〜10枚）】</strong><br>求人が出ていない企業に対しても、その会社の成長に必要な新規事業、DX推進体制、新拠点立ち上げなどの構想をまとめ、自らがそのリーダーとなるポジションを直接提案します。',
+        interviewStance: '採用面接という枠組みを超え、「御社の次の成長を牽引するパートナー」としての対等な経営商談として面談を設計します。',
+        pitfall: '単なる「夢物語」で終わらないよう、収益モデルの現実性や、初期コスト・リスクをどうヘッジするかという解像度を徹底的に高めて臨みましょう。',
+        nextAction: '自分の経験×成長産業の掛け合わせで、他社に持ち込める「新規事業または新部門のコンセプトペーパー」を1部作ってみましょう。'
+      }
+    };
+
+    // 主タイプ×サブタイプのシナジー辞書（20通り）
+    const synergyMatrix = {
+      'A-B': '【高精度な専門実務の堅牢な守護者】確固たる専門知識に基づき、組織の基盤を絶対に破綻させない確実な運用と改善を両立できる稀有な安定力を持っています。',
+      'A-C': '【組織の安心感を支えるバランサー】ルールや運用の安定性を重んじながらも、メンバーの気持ちに寄り添った丁寧な調整ができる、チームに不可欠な存在です。',
+      'A-D': '【着実な変革を導くリスクマネージャー】課題解決の意欲を持ちながらも、現場のオペレーションを破綻させない安全運転ができるため、大企業や過渡期の組織で絶大な信頼を得ます。',
+      'A-E': '【持続可能な新規体制の設計者】新しい挑戦をしつつも、それを一過性の花火に終わらせず、再現性ある組織ルーティンに落とし込める貴重な実行力を持っています。',
+
+      'B-A': '【現場を破綻させない実力派スペシャリスト】高度な専門知見を持ちながら、日々のルーティンや実務の細部をおろそかにせず、完璧な品質でやり抜きます。',
+      'B-C': '【専門知見を噛み砕いて伝える翻訳者】深い専門性を持ちながら、非専門家や他部署のメンバーとも温かい信頼関係を築き、知見を組織全体に浸透させられます。',
+      'B-D': '【専門性をテコにした課題解決の突破役】「何が問題か」だけでなく「自分の専門技術でどう解くか」までを一気通貫で提示できる、非常に決定力の高いスタイルです。',
+      'B-E': '【技術・専門発のイノベーター】自身の専門領域の深い洞察から、世の中にない新しいサービスや事業機会を発見し、形にできる開拓者です。',
+
+      'C-A': '【チームの規律と調和を守る現場リーダー】メンバーとの信頼関係を土台にしながら、チーム全体の業務品質とスケジュールを確実に維持・管理できます。',
+      'C-B': '【専門家集団を束ねるファシリテーター】気難しい専門家や職人気質のメンバーとも心を通わせ、その高い技術力を組織成果へと昇華させる調整役です。',
+      'C-D': '【周囲を巻き込む共創型チェンジリーダー】正論を振りかざすのではなく、現場の痛みに寄り添いながら一緒に課題を解いていくため、変革への抵抗を最小限に抑えられます。',
+      'C-E': '【人を動かして新境地を拓くプロデューサー】魅力的なビジョンと人徳で多様な仲間を惹きつけ、一人ではできない大きな事業や新プロジェクトを実現します。',
+
+      'D-A': '【地に足のついた実務派ソリューション推進者】理想論に走ることなく、現場の運用負荷やリスクを見極めながら、確実に成果の出る改善を着実に推進できます。',
+      'D-B': '【深いドメイン知識に裏打ちされた課題解決者】表面的なコンサル的提案ではなく、実務の勘所を熟知した解像度の高い処方箋を提示できるため、経営陣を唸らせます。',
+      'D-C': '【対話で合意を形成する課題解決パートナー】課題の仮説を持ち込みつつも、相手の意見を柔軟に取り入れながら「共創」できる、最も企業から好まれる提案スタイルです。',
+      'D-E': '【ビジョンを実行計画に落とし込む事業推進責任者】新しい事業や改革の構想を、具体的なマイルストーンとタスクに分解してやり切る、変革期のNo.2に最適な資質です。',
+
+      'E-A': '【立ち上げから定着まで見届ける事業ビルダー】ゼロイチの構想力だけでなく、それを確実に回る仕組みへと定着させる責任感を兼ね備えています。',
+      'E-B': '【独自技術・ドメインを核とした新事業開拓者】自らの専門性や業界の深い不の解消を武器に、競合が真似できない差別化された新事業を創出します。',
+      'E-C': '【仲間を鼓舞して旗を立てる求心力リーダー】ワクワクする未来像を語り、周囲を熱狂させてチームを一丸にしながら新しい道を切り拓きます。',
+      'E-D': '【市場の痛みを事業に変える実践的アントレプレナー】企業の構造的課題を的確に見抜き、それを解決する新しいビジネスや役割そのものを生み出す変革者です。'
+    };
+
+    // 10問の設問定義マスター
+    const quizQuestionsMaster = [
+      {
+        id: 'q1',
+        title: 'Q1. これまでのキャリアで、最も達成感や「自分らしさ」を感じた瞬間は？',
+        subtitle: 'あなたが最もエネルギーを感じる仕事の原点を教えてください（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: 'トラブルや属人化で混乱していた現場の手順を整備し、ミスのない安定運用基盤をつくった時' },
+          { type: 'B', label: '社内の誰も解けなかった高度な専門課題や技術的ボトルネックを自分の知見・腕前で解決した時' },
+          { type: 'C', label: '若手とベテラン、営業と現場など、利害が対立していた関係者全員と膝を突き合わせて合意を形成した時' },
+          { type: 'D', label: '「昔からの慣習だから」と放置されていた無駄な業務フローを特定し、新しい仕組みに変えた時' },
+          { type: 'E', label: '既存の枠組みにはなかった新規事業や新ポジションを自ら構想し、ゼロから形にした時' }
+        ]
+      },
+      {
+        id: 'q2',
+        title: 'Q2. 部下や後輩を指導・育成する際、あなたが最も重視するスタンスは？',
+        subtitle: '次の世代に「何を受け継ぎたい」と考えていますか？（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '基本的な手順やルールを徹底させ、ミスや手戻りを防ぐ「確実な仕事の型」を身につけさせる' },
+          { type: 'B', label: '小手先ではなく、特定分野における「本質的な専門知見やプロとしての技術の深み」を伝える' },
+          { type: 'C', label: '相手の悩みや個性にじっくり耳を傾け、何でも安心して相談できる「心理的安全性」を築く' },
+          { type: 'D', label: '「なぜこの仕事が必要か」の目的を考えさせ、自ら課題を設定して改善策を打てる思考力を鍛える' },
+          { type: 'E', label: '社内の前例や政治にとらわれず、新しいアイデアや挑戦に自発的に踏み出す勇気を持たせる' }
+        ]
+      },
+      {
+        id: 'q3',
+        title: 'Q3. 突然、部門をまたぐ前例のないプロジェクトを任されたとき、あなたの最初の初動は？',
+        subtitle: '役割やゴールが曖昧な状況下で、まず何から着手しますか？（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: 'まず責任範囲、期日、想定されるリスク要因を洗い出し、確実な工程計画を固める' },
+          { type: 'B', label: '自分の専門性が最も活きる領域を特定し、その部分のアウトプットの品質を徹底して極める' },
+          { type: 'C', label: '関係部署のキーマンと1対1で対話し、それぞれの本音や懸念事項を丁寧にヒアリングして味方を増やす' },
+          { type: 'D', label: 'プロジェクト全体の目的と現状のボトルネックを可視化し、「何が本質的な課題か」の仮説を立てる' },
+          { type: 'E', label: '「このプロジェクトを通じて会社をどう変革できるか」の魅力的なビジョンを描いて旗を立てる' }
+        ]
+      },
+      {
+        id: 'q4',
+        title: 'Q4. 組織内の「非効率な慣習や古いルール」に直面したとき、どのように向き合いますか？',
+        subtitle: '組織のしがらみや抵抗に対するあなたのアプローチ（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '勝手にルールを破るのではなく、安全な手順を踏んでマニュアルを改定し、無理なく定着させる' },
+          { type: 'B', label: '専門的なITツールや最新の実務手法を現場に導入し、作業の質とスピードを技術的に底上げする' },
+          { type: 'C', label: '現場メンバーの不安やベテランのプライドに配慮し、誰もが納得できる合意形成を丁寧に図る' },
+          { type: 'D', label: '非効率によって生じている時間・コストの損失をデータで示し、経営・上長に仕組み改革を働きかける' },
+          { type: 'E', label: '古い慣習の改善に時間を取られるより、まったく新しい別動隊や新モデルを立ち上げて実績で示す' }
+        ]
+      },
+      {
+        id: 'q5',
+        title: 'Q5. 40代以降のキャリアにおいて、あなたが「最大の強み」だと自負するものは？',
+        subtitle: 'これまでのキャリアで培った、あなたの一番の武器（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: 'どんな状況でも業務を破綻させず、確実にやり遂げる「運用の安定力とリスク管理力」' },
+          { type: 'B', label: '一朝一夕には真似できない、特定分野における「深い専門知見と実務の腕前」' },
+          { type: 'C', label: '世代や立場の異なる人々をつなぎ、信頼関係を築いて組織を動かす「人間関係構築力」' },
+          { type: 'D', label: '曖昧な状況から本質的な問題を見抜き、打ち手を構造化してやり切る「課題解決推進力」' },
+          { type: 'E', label: 'ゼロから構想を描き、リスクを取って新しい価値や役割を生み出す「事業創出力」' }
+        ]
+      },
+      {
+        id: 'q6',
+        title: 'Q6. 興味のある企業があるが、希望する求人票が出ていないとき、どう動きますか？',
+        subtitle: '転職市場に対するあなたの能動的なアプローチスタイル（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '適切な募集が出るまで採用ページやエージェントの動向をウォッチし、応募要件を精査する' },
+          { type: 'B', label: '自分の専門領域で困っているはずだと仮説を立て、専門職の空きがないかエージェント経由でピンポイント打診する' },
+          { type: 'C', label: '知人や人的ネットワークを通じて社員にコンタクトを取り、社内のリアルな雰囲気や現場の困りごとを聞く' },
+          { type: 'D', label: '企業のIRやニュースから課題を分析し、「私が貢献できる解決テーマ」をA4メモにまとめて打診する' },
+          { type: 'E', label: '経営陣や採用責任者に直接アプローチし、「御社に必要な新ポジション」を企画提案書として持ち込む' }
+        ]
+      },
+      {
+        id: 'q7',
+        title: 'Q7. 転職面接（特に役員や事業部長との面談）で、最も大切にしたい対話姿勢は？',
+        subtitle: '面接を「一方的に品定めされる場」から「対等な商談の場」に変えるスタンス（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '「求められる役割を120%確実に完遂し、組織に安心感と規律をもたらす」という信頼感を伝える' },
+          { type: 'B', label: '相手が抱える専門的ボトルネックに対し、プロとしての的確な解決方針と他社事例の知見を示す' },
+          { type: 'C', label: '「現場のチームが今一番困っていること」を丁寧に聞き出し、相手と一緒に役割をデザインする' },
+          { type: 'D', label: '「御社のこの課題に対し、私なら初期3ヶ月で〇〇、半年で△△を検証できます」と未来の計画を語る' },
+          { type: 'E', label: '採用選考の枠を超え、「次の事業成長を共につくるビジネスパートナー」として経営目線で商談する' }
+        ]
+      },
+      {
+        id: 'q8',
+        title: 'Q8. 新しい職場に転職した「最初の1ヶ月」で、あなたが最も注力することは？',
+        subtitle: '新しい組織への適応（オンボーディング）のスタイル（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '現行の業務ルールや日常ルーティンを正確に把握し、ミスなく自走できる基盤を固める' },
+          { type: 'B', label: '自部門のデータや専門ツールの実態を詳細に分析し、自分の専門知見を活かせるポイントを特定する' },
+          { type: 'C', label: 'チームメンバーやキーマン全員と対話し、組織の人間関係や暗黙のルール（社内風土）を理解する' },
+          { type: 'D', label: '業務フロー全体と現場の困りごとを観察し、小さく解決できる「クイックウィン（初期の成果）」を出す' },
+          { type: 'E', label: '経営陣のビジョンを深く再確認し、新事業・新企画のロードマップ案を作成し始める' }
+        ]
+      },
+      {
+        id: 'q9',
+        title: 'Q9. もし転職先で「事前の説明と実際の現場環境が違っていた」場合、どう対処しますか？',
+        subtitle: '予期せぬギャップや組織の機能不全への向き合い方（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: 'まずは与えられた業務範囲をきっちりこなし、日々の実務を通じて運用のズレを徐々に修正する' },
+          { type: 'B', label: '自分の専門性を発揮できる領域に軸足を置き、確実な成果を出して周囲の信頼を勝ち取る' },
+          { type: 'C', label: '周囲の同僚や現場メンバーと関係を深め、なぜそのズレが生じているのか現場の本音を拾う' },
+          { type: 'D', label: 'ギャップの原因となっている構造的課題を整理し、上長に対話ベースで改善策を提案する' },
+          { type: 'E', label: 'むしろ「裁量があるチャンス」と前向きに捉え、求人票になかった新しい役割を自ら定義して広げる' }
+        ]
+      },
+      {
+        id: 'q10',
+        title: 'Q10. あなたが目指す、50代・60代に向けた「理想のキャリア像」は？',
+        subtitle: '生涯現役で価値を発揮し続けるための目指す姿（最大2つまで選択可）',
+        options: [
+          { type: 'A', label: '組織の要所を支える守護神として、着実に組織の継続性と安心感を保ち続ける存在' },
+          { type: 'B', label: '業界内で「この領域ならこの人」と一目置かれる、生涯現役の専門スペシャリスト' },
+          { type: 'C', label: '人と人、組織と組織をつなぐハブとして、多様な人材の力を引き出すファシリテーター' },
+          { type: 'D', label: '企業の成長ステージや変革期に呼ばれ、課題を次々に解決していく実践リーダー' },
+          { type: 'E', label: '企業の枠を超えて自ら事業やプロジェクトを立ち上げ、変革をリードするイノベーター' }
+        ]
+      }
+    ];
+
+    // 配列シャッフル関数 (Fisher-Yates)
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // 画面遷移関数
+    function goToStart() {
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('screen-result').classList.add('hidden');
+      document.getElementById('bottom-bar').classList.add('hidden');
+      document.getElementById('screen-intro').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startDiagnosis() {
+      document.getElementById('screen-intro').classList.add('hidden');
+      document.getElementById('screen-result').classList.add('hidden');
+      document.getElementById('screen-quiz').classList.remove('hidden');
+      document.getElementById('bottom-bar').classList.remove('hidden');
+      
+      // 診断開始時に全設問の選択肢をランダムシャッフル
+      state.shuffledQuestions = quizQuestionsMaster.map(q => ({
+        ...q,
+        options: shuffleArray(q.options)
+      }));
+
+      state.currentStep = 0;
+      renderCurrentStep();
+    }
+
+    // ステップ描画ロジック
+    function renderCurrentStep() {
+      const container = document.getElementById('quiz-card');
+      const totalSteps = state.shuffledQuestions.length || 10;
+      const current = state.currentStep; // 0: 基本属性, 1〜10: 設問
+
+      // プログレスバー更新
+      const progressPercent = current === 0 ? 5 : Math.round((current / totalSteps) * 100);
+      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+      // ヘッダーラベル更新
+      if (current === 0) {
+        document.getElementById('step-label').textContent = 'Step 0: 基本属性の確認';
+        document.getElementById('step-count').textContent = '準備中';
+        document.getElementById('btn-prev').classList.add('hidden');
+        document.getElementById('btn-next-text').textContent = '診断設問へ進む (全10問)';
+      } else {
+        document.getElementById('step-label').textContent = `Step 1: 価値観シナリオ診断`;
+        document.getElementById('step-count').textContent = `${current} / ${totalSteps}`;
+        document.getElementById('btn-prev').classList.remove('hidden');
+        document.getElementById('btn-next-text').textContent = current === totalSteps ? '診断結果を見る' : '次の質問へ';
+      }
+
+      // カードコンテンツ生成
+      if (current === 0) {
+        // 基本属性入力
+        container.innerHTML = `
+          <div class="border-b border-slate-100 pb-3">
+            <h2 class="text-base font-bold text-slate-800">あなたの現在のプロフィール</h2>
+            <p class="text-xs text-slate-500 mt-0.5">診断結果にパーソナライズされた助言を反映します</p>
+            <div class="mt-2 text-[11px] text-slate-500 bg-slate-50 border border-slate-200/80 rounded-lg p-2 flex items-center space-x-1.5">
+              <i class="fa-solid fa-shield-halved text-blue-600 text-xs flex-shrink-0"></i>
+              <div class="leading-tight">
+                ※回答データはサーバー等に送信・保存されません（完全匿名・端末内処理）。
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4 pt-1">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">① ご年代</label>
+              <div class="grid grid-cols-3 gap-1.5">
+                ${['30代以下', '40代前半', '40代後半', '50代前半', '50代後半', '60代以上'].map((val, idx) => `
+                  <div>
+                    <input type="radio" id="attr_age_${idx}" name="attr_age" value="${val}" class="hidden peer" ${state.attributes.age === val ? 'checked' : ''} onchange="state.attributes.age='${val}'">
+                    <label for="attr_age_${idx}" class="block text-center py-2.5 px-1 border border-slate-200 rounded-xl text-xs text-slate-700 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-700 peer-checked:font-bold cursor-pointer transition">
+                      ${val}
+                    </label>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">② 現職（直近）の在職年数</label>
+              <div class="grid grid-cols-2 gap-1.5">
+                ${['3年未満', '3〜5年', '6〜10年', '11〜20年', '21年以上'].map((val, idx) => `
+                  <div>
+                    <input type="radio" id="attr_tenure_${idx}" name="attr_tenure" value="${val}" class="hidden peer" ${state.attributes.tenure === val ? 'checked' : ''} onchange="state.attributes.tenure='${val}'">
+                    <label for="attr_tenure_${idx}" class="block text-center py-2.5 px-2 border border-slate-200 rounded-xl text-xs text-slate-700 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-700 peer-checked:font-bold cursor-pointer transition">
+                      ${val}
+                    </label>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1.5">③ 現在の転職・キャリア意向</label>
+              <div class="space-y-1.5">
+                ${[
+                  { val: '積極的に転職活動中', sub: '半年〜1年以内の転職を目指す' },
+                  { val: '1年以内・良い話があれば', sub: '情報収集や機会を探る' },
+                  { val: '社外での市場価値を知りたい', sub: '副業やキャリアの棚卸し' }
+                ].map((item, idx) => `
+                  <div>
+                    <input type="radio" id="attr_intent_${idx}" name="attr_intent" value="${item.val}" class="hidden peer" ${state.attributes.intention === item.val ? 'checked' : ''} onchange="state.attributes.intention='${item.val}'">
+                    <label for="attr_intent_${idx}" class="block p-3 border border-slate-200 rounded-xl text-xs text-slate-700 peer-checked:border-blue-600 peer-checked:bg-blue-50 peer-checked:text-blue-700 cursor-pointer transition">
+                      <div class="font-bold text-slate-800">${item.val}</div>
+                      <div class="text-[10px] text-slate-400 mt-0.5">${item.sub}</div>
+                    </label>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+        `;
+      } else {
+        // 10問の設問描画（順不同・マルチアンサー・チェックボックス対応）
+        const qIndex = current - 1;
+        const q = state.shuffledQuestions[qIndex];
+        const currentSelectedList = state.answers[q.id] || [];
+
+        let html = `
+          <div class="border-b border-slate-100 pb-3">
+            <div class="flex items-center justify-between mb-1">
+              <span class="inline-block text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md font-eng">
+                QUESTION ${current} / ${totalSteps}
+              </span>
+              <span id="selected-badge" class="text-[10px] font-bold ${currentSelectedList.length > 0 ? 'text-blue-600 bg-blue-100/70' : 'text-slate-400 bg-slate-100'} px-2 py-0.5 rounded-full">
+                選択中: ${currentSelectedList.length} / 最大2つ
+              </span>
+            </div>
+            <h2 class="text-sm font-bold text-slate-900 leading-snug">${q.title}</h2>
+            <p class="text-[11px] text-slate-500 mt-1">${q.subtitle}</p>
+          </div>
+
+          <div class="space-y-2.5 pt-1">
+        `;
+
+        q.options.forEach((opt, oIdx) => {
+          const isChecked = currentSelectedList.includes(opt.type);
+          html += `
+            <div>
+              <input type="checkbox" id="${q.id}_opt_${oIdx}" name="${q.id}" value="${opt.type}" class="hidden peer" ${isChecked ? 'checked' : ''} onchange="handleMultiSelect('${q.id}', '${opt.type}', this)">
+              <label for="${q.id}_opt_${oIdx}" class="option-card block p-3.5 border border-slate-200 rounded-xl bg-white text-xs text-slate-700 peer-checked:border-blue-600 peer-checked:bg-blue-50/80 peer-checked:text-blue-950 peer-checked:shadow-sm cursor-pointer transition leading-relaxed">
+                <div class="flex items-start">
+                  <span class="w-5 h-5 rounded-md border border-slate-300 peer-checked:border-blue-600 peer-checked:bg-blue-600 peer-checked:text-white flex-shrink-0 flex items-center justify-center text-[10px] font-bold mr-2.5 mt-0.5">
+                    ${isChecked ? '<i class="fa-solid fa-check text-[9px]"></i>' : (oIdx + 1)}
+                  </span>
+                  <div class="flex-grow font-medium">${opt.label}</div>
+                </div>
+              </label>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+        container.innerHTML = html;
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 複数選択（マルチアンサー・最大2つ）のハンドラー
+    function handleMultiSelect(qId, val, checkboxEl) {
+      if (!state.answers[qId]) {
+        state.answers[qId] = [];
+      }
+
+      const list = state.answers[qId];
+      if (checkboxEl.checked) {
+        if (list.length >= 2) {
+          // 最大2つ制限
+          checkboxEl.checked = false;
+          alert('1つの設問につき、選択できるのは最大2つまでです。');
+          return;
+        }
+        list.push(val);
+      } else {
+        const idx = list.indexOf(val);
+        if (idx > -1) list.splice(idx, 1);
+      }
+
+      // バッジ表示の更新
+      const badge = document.getElementById('selected-badge');
+      if (badge) {
+        badge.textContent = `選択中: ${list.length} / 最大2つ`;
+        badge.className = `text-[10px] font-bold ${list.length > 0 ? 'text-blue-600 bg-blue-100/70' : 'text-slate-400 bg-slate-100'} px-2 py-0.5 rounded-full`;
+      }
+    }
+
+    function prevStep() {
+      if (state.currentStep > 0) {
+        state.currentStep--;
+        renderCurrentStep();
+      }
+    }
+
+    function nextStep() {
+      const current = state.currentStep;
+      const totalSteps = state.shuffledQuestions.length || 10;
+
+      if (current === 0) {
+        state.currentStep++;
+        renderCurrentStep();
+        return;
+      }
+
+      const qIndex = current - 1;
+      const q = state.shuffledQuestions[qIndex];
+      const selectedList = state.answers[q.id] || [];
+
+      if (selectedList.length === 0) {
+        alert('当てはまる選択肢を1〜2つ選んでください。');
+        return;
+      }
+
+      if (current < totalSteps) {
+        state.currentStep++;
+        renderCurrentStep();
+      } else {
+        calculateAndShowResult();
+      }
+    }
+
+    // スコア集計（100点満点）と高度な4パターン主副判定
+    function calculateAndShowResult() {
+      // スコア初期化
+      state.scores = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+
+      // 回答集計（1問あたり10点を按分配点：1個なら10点、2個なら各5点）
+      Object.keys(state.answers).forEach(qId => {
+        const list = state.answers[qId];
+        if (list && list.length > 0) {
+          const weight = 10.0 / list.length;
+          list.forEach(type => {
+            if (state.scores[type] !== undefined) {
+              state.scores[type] += weight;
+            }
+          });
+        }
+      });
+
+      // 画面切り替え
+      document.getElementById('screen-quiz').classList.add('hidden');
+      document.getElementById('bottom-bar').classList.add('hidden');
+      document.getElementById('screen-result').classList.remove('hidden');
+
+      // スコアソート
+      const sortedTypes = Object.keys(state.scores).sort((a, b) => {
+        if (state.scores[b] !== state.scores[a]) {
+          return state.scores[b] - state.scores[a];
+        }
+        return a.localeCompare(b);
+      });
+
+      const k1 = sortedTypes[0];
+      const k2 = sortedTypes[1];
+      const k3 = sortedTypes[2];
+
+      const s1 = state.scores[k1];
+      const s2 = state.scores[k2];
+      const s3 = state.scores[k3];
+      const gap12 = s1 - s2;
+      const gap13 = s1 - s3;
+
+      const mainData = typeMeta[k1];
+      const subData = typeMeta[k2];
+
+      let patternName = '二刀流シナジー型';
+      let subTitleText = `${subData.shortName}（${Math.round(s2)}点）`;
+      let synergyHtml = '';
+
+      // 4パターンの判定分岐（100点スケール換算）
+      if ((s1 >= 45 && gap12 >= 20) || s2 < 18) {
+        // パターン1: 単一特化型 (Single Specialist)
+        patternName = '単一特化型';
+        subTitleText = '特化型（サブタイプなし）';
+        synergyHtml = `
+          <div class="font-bold text-indigo-900 mb-1 flex items-center">
+            <i class="fa-solid fa-crown text-indigo-600 mr-1.5"></i>【単一特化型】1本の鋭い軸で勝負する純粋プロフェッショナル
+          </div>
+          <div>あなたの志向性は主タイプ【${mainData.shortName}】のスコアが<strong>${Math.round(s1)}点</strong>と圧倒的に突出しています。無理に複数の強みをアピールするのではなく、この「1本の鋭い軸」を提案書の中心に据え、特定分野の決定的なプロとして勝負する戦略が最も効果的です。</div>
+        `;
+      } else if (gap13 <= 12 && s1 <= 35) {
+        // パターン2: 多面統合バランサー型 (Balanced Generalist)
+        const t3Data = typeMeta[k3];
+        patternName = '多面統合バランサー型';
+        subTitleText = `${subData.shortName} ＆ ${t3Data.shortName}`;
+        synergyHtml = `
+          <div class="font-bold text-indigo-900 mb-1 flex items-center">
+            <i class="fa-solid fa-shapes text-indigo-600 mr-1.5"></i>【多面統合バランサー型】状況に応じて役割を変幻自在にこなす総合力
+          </div>
+          <div>主軸の【${mainData.shortName}】（${Math.round(s1)}点）を中心に、【${subData.shortName}】（${Math.round(s2)}点）、【${t3Data.shortName}】（${Math.round(s3)}点）の上位3軸が極めて均等に高くバランスしています。状況に応じて守り・攻め・調整を臨機応変に切り替えられる『現場統括・ユーティリティリーダー』としての総合力が最大の武器です。</div>
+        `;
+      } else if (gap12 <= 15 && s2 >= 25) {
+        // パターン3: 二刀流シナジー型 (Dual Synergy)
+        patternName = '二刀流シナジー型';
+        const synKey = `${k1}-${k2}`;
+        const synText = synergyMatrix[synKey] || `${mainData.shortName}の推進力に、${subData.shortName}の強みが加わった独自の相乗効果を発揮します。`;
+        synergyHtml = `
+          <div class="font-bold text-indigo-900 mb-1 flex items-center">
+            <i class="fa-solid fa-bolt text-indigo-600 mr-1.5"></i>【二刀流シナジー型】${mainData.shortName} × ${subData.shortName} の相乗効果
+          </div>
+          <div class="mb-2">主タイプの【${mainData.shortName}】（${Math.round(s1)}点）とサブタイプの【${subData.shortName}】（${Math.round(s2)}点）が共に高く拮抗しています。単一の強みにとどまらず、2つの武器が掛け合わさることで他者にはない希少価値を生み出します。</div>
+          <div class="text-indigo-900 font-semibold bg-white/80 p-2.5 rounded-lg border border-indigo-200/60">${synText}</div>
+        `;
+      } else {
+        // パターン4: 主軸＋補佐連携型 (Primary Core + Supporting Skill)
+        patternName = '主軸＋補佐連携型';
+        synergyHtml = `
+          <div class="font-bold text-indigo-900 mb-1 flex items-center">
+            <i class="fa-solid fa-layer-group text-indigo-600 mr-1.5"></i>【主軸＋補佐連携型】${mainData.shortName}を主軸とし、${subData.shortName}で支える構造
+          </div>
+          <div>メインの武器となる【${mainData.shortName}】（${Math.round(s1)}点）を明確な突破口としつつ、サブタイプの【${subData.shortName}】（${Math.round(s2)}点）を実務の安心材料（補佐役）として連携させるスタイルです。提案書では主軸の成果を前面に出し、面接の質疑ではサブタイプの知見を添えることで、説得力と安心感の両立を図れます。</div>
+        `;
+      }
+
+      // 結果DOMへの反映
+      document.getElementById('res-main-type').textContent = mainData.name;
+      document.getElementById('res-tagline').textContent = mainData.tagline;
+      document.getElementById('res-sub-type').textContent = subTitleText;
+      document.getElementById('res-pattern-badge').textContent = patternName;
+      document.getElementById('res-synergy-box').innerHTML = synergyHtml;
+
+      document.getElementById('res-characteristics').textContent = mainData.characteristics;
+      document.getElementById('res-coreStrength').textContent = mainData.coreStrength;
+      document.getElementById('res-proposal-format').innerHTML = mainData.proposalFormat;
+      document.getElementById('res-interview-stance').textContent = mainData.interviewStance;
+      document.getElementById('res-pitfall').innerHTML = mainData.pitfall;
+      document.getElementById('res-nextaction').textContent = mainData.nextAction;
+
+      // 属性パーソナライズ助言
+      const ageVal = state.attributes.age || '40代前半';
+      const tenureVal = state.attributes.tenure || '11〜20年';
+      document.getElementById('res-attr-age').textContent = ageVal;
+      document.getElementById('res-attr-tenure').textContent = tenureVal;
+
+      let advice = '';
+      if (tenureVal === '11〜20年' || tenureVal === '21年以上') {
+        advice = `長年培った業務知見や社内調整力は確かな強みですが、無意識のうちに「社内常識・社内ローカル用語」に縛られやすい傾向があります。他社の経営課題の言葉へ翻訳し、「前の会社ではこうだった」というプライドを捨てる『アンラーニングの姿勢』を面接で示すことが成功の決定打となります。`;
+      } else if (tenureVal === '3年未満' || tenureVal === '3〜5年') {
+        advice = `転職経験や多様な環境への適応力は武器ですが、40代の採用では「短期間でどんな再現性ある成果を出せるか」の解像度が求められます。各社での経験を「1本の軸（課題解決の得意パターン）」として束ねて語る準備をしましょう。`;
+      } else {
+        advice = `これまでの実績を単なる過去の職歴として語るのではなく、「御社のこれからの半年・1年の課題にどう再現できるか」という未来の提案書として差し出すことで、面接官（役員・社長）との対等な商談をつくることができます。`;
+      }
+      document.getElementById('res-attr-advice').textContent = advice;
+
+      // スコアバッジ更新 (100点満点・整数表示)
+      document.getElementById('score-a').textContent = `${Math.round(state.scores.A)}点`;
+      document.getElementById('score-b').textContent = `${Math.round(state.scores.B)}点`;
+      document.getElementById('score-c').textContent = `${Math.round(state.scores.C)}点`;
+      document.getElementById('score-d').textContent = `${Math.round(state.scores.D)}点`;
+      document.getElementById('score-e').textContent = `${Math.round(state.scores.E)}点`;
+
+      // レーダーチャート描画
+      drawRadarChart();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 4つの強み構造パターンモーダル開閉
+    function openPatternModal() {
+      document.getElementById('pattern-modal').classList.remove('hidden');
+    }
+
+    function closePatternModal() {
+      document.getElementById('pattern-modal').classList.add('hidden');
+    }
+
+    // Chart.js レーダーチャート描画 (100点満点スケール)
+    function drawRadarChart() {
+      const ctx = document.getElementById('typeRadarChart').getContext('2d');
+      if (state.chartInstance) {
+        state.chartInstance.destroy();
+      }
+
+      state.chartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: [
+            ['Type A', '安定実行'],
+            ['Type B', '専門追求'],
+            ['Type C', '関係協働'],
+            ['Type D', '課題解決'],
+            ['Type E', '事業創造']
+          ],
+          datasets: [{
+            label: '価値観スコア',
+            data: [
+              Math.round(state.scores.A),
+              Math.round(state.scores.B),
+              Math.round(state.scores.C),
+              Math.round(state.scores.D),
+              Math.round(state.scores.E)
+            ],
+            backgroundColor: 'rgba(37, 99, 235, 0.25)',
+            borderColor: '#2563eb',
+            borderWidth: 2.5,
+            pointBackgroundColor: '#2563eb',
+            pointBorderColor: '#ffffff',
+            pointBorderWidth: 2,
+            pointRadius: 4.5,
+            pointHoverRadius: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 900,
+            easing: 'easeOutQuart'
+          },
+          scales: {
+            r: {
+              beginAtZero: true,
+              max: 60, // 5軸合計100点のため、最大軸表示は60点に設定すると綺麗に広がります
+              min: 0,
+              ticks: {
+                stepSize: 20,
+                display: false
+              },
+              grid: {
+                color: 'rgba(203, 213, 225, 0.75)',
+                circular: false
+              },
+              angleLines: {
+                color: 'rgba(203, 213, 225, 0.75)'
+              },
+              pointLabels: {
+                font: {
+                  size: 11,
+                  family: "'Noto Sans JP', sans-serif",
+                  weight: '700'
+                },
+                color: '#1e293b'
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label[1]}: ${Number(context.raw)}点 / 100点満点`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // 再診断
+    function restartDiagnosis() {
+      state.answers = {};
+      state.scores = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+      document.getElementById('screen-result').classList.add('hidden');
+      document.getElementById('screen-intro').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 現在の公開URL取得（GitHub Pages等で動的に動作）
+    function getShareUrl() {
+      if (window.location.protocol.startsWith('http')) {
+        return window.location.origin + window.location.pathname;
+      }
+      return 'https://naohiro-s.github.io/proud-babbage/';
+    }
+
+    // X (Twitter) シェア（無料アカウント140文字制限内に最適化・ハッシュタグなし）
+    function shareOnX() {
+      const sortedTypes = Object.keys(state.scores).sort((a, b) => state.scores[b] - state.scores[a]);
+      const main = typeMeta[sortedTypes[0]];
+      const sub = typeMeta[sortedTypes[1]];
+      const url = getShareUrl();
+      
+      const text = `【提案型転職タイプ診断】\n私の提案スタイルは『${main.name}』でした！（サブタイプ：${sub.shortName}）\n\n求人票に合わせるのではなく、いままでの経験で役割をつくる。\n\n▼あなたの提案スタイルを無料診断\n${url}`;
+      
+      const shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      window.open(shareUrl, '_blank');
+    }
+
+    // LinkedIn or Native Share
+    function shareNativeOrLinkedIn() {
+      const sortedTypes = Object.keys(state.scores).sort((a, b) => state.scores[b] - state.scores[a]);
+      const main = typeMeta[sortedTypes[0]];
+      const sub = typeMeta[sortedTypes[1]];
+      const url = getShareUrl();
+
+      if (navigator.share) {
+        navigator.share({
+          title: '提案型転職 あなたのタイプは？',
+          text: `私の提案スタイルは『${main.name}（サブタイプ：${sub.shortName}）』でした！求人票に合わせず経験で役割をつくる診断ツールです。`,
+          url: url
+        }).catch(() => {});
+      } else {
+        const liUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+        window.open(liUrl, '_blank');
+      }
+    }
+
+    // 結果テキストのクリップボードコピー
+    function copyResultText() {
+      const sortedTypes = Object.keys(state.scores).sort((a, b) => state.scores[b] - state.scores[a]);
+      const main = typeMeta[sortedTypes[0]];
+      const sub = typeMeta[sortedTypes[1]];
+      const url = getShareUrl();
+
+      const text = `【提案型転職タイプ診断 結果レポート】\n━━━━━━━━━━━━━━━━━━━━\n■ 主タイプ：${main.name} (${Math.round(state.scores[sortedTypes[0]])}点)\n■ サブタイプ：${sub.name} (${Math.round(state.scores[sortedTypes[1]])}点)\n\n■ キャッチコピー：\n${main.tagline}\n\n■ 最大の武器：\n${main.coreStrength}\n\n■ あなた流の提案書スタイル：\n${main.proposalFormat.replace(/<[^>]*>?/gm, '')}\n\n■ 面接での対話スタンス：\n${main.interviewStance}\n\n■ 避けるべき落とし穴：\n${main.pitfall.replace(/<[^>]*>?/gm, '')}\n━━━━━━━━━━━━━━━━━━━━\n診断ツールURL: ${url}`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        const label = document.getElementById('copy-btn-label');
+        const origText = label.textContent;
+        label.textContent = 'コピーしました！✓';
+        setTimeout(() => {
+          label.textContent = origText;
+        }, 2000);
+      }).catch(() => {
+        alert('コピーに失敗しました。');
+      });
+    }
+  </script>
+</body>
+</html>
