@@ -104,6 +104,6 @@
 - **Content**（文章・図表・分析結果・整理済みデータ）: [CC BY 4.0](LICENSE-CONTENT.md)
 - 出典表示例 / Attribution: Naohisa Hashimoto, "proactive-career-diagnosis", https://naohisastry.github.io/proactive-career-diagnosis/
 - 第三者の元データの権利は各発行元に帰属します。 / Third-party source data remain the property of their original publishers.
-- **連動コラム**: [note.com 連載『【40歳からの転職】求人票は見るな！組織の課題を自ら解く「提案型転職」のススメ』](https://note.com)
+- **連動コラム**: [note.com 連載『【40歳からの転職】求人票は見るな！組織の課題を自ら解く「提案型転職」のススメ』](https://note.com/naohisas/n/ne3bad65f7365)
 
 © 2026 Naohisa Hashimoto
